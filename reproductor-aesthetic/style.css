@@ -85,3 +85,26 @@ button:hover {
     color: #888;
     margin-bottom: 15px;
 }
+/* Clase para el modo "Vaporwave" (se activará con JS) */
+body.vaporwave {
+    background: linear-gradient(135deg, #ff71ce 0%, #01cdfe 100%);
+}
+
+body.vaporwave .player-card {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #b967ff;
+    color: #fff;
+}
+
+body.vaporwave #play, body.vaporwave .progress-bar {
+    background: #05ffa1;
+    color: #000;
+}
+
+/* Estilo para el botón de cambio */
+.mood-btn {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    font-size: 0.8rem;
+}
