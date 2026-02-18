@@ -46,10 +46,28 @@ themeBtn.addEventListener('click', () => {
     }
 });
 // Usamos links directos de internet
-const songs = ['https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73430.mp3'];
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 
-  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
+// 1. Lista de canciones con links directos
+const songs = [
+  'https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73430.mp3', // Canción 1
+  'https://cdn.pixabay.com/audio/2022/03/15/audio_9032799131.mp3'  // Canción 2
 ];
+
+let songIndex = 0;
+let isPlaying = false;
+
+// 2. Configuramos el audio inicial
+const audio = new Audio(songs[songIndex]);
+
+// 3. Función para cargar canciones (Asegúrate de reemplazar la vieja si ya tenías una)
+function loadSong(index) {
+    audio.pause(); 
+    audio.src = songs[index];
+    audio.load(); 
+    if (isPlaying) {
+        audio.play();
+    }
+}
+
 let songIndex = 0;
 
 // IMPORTANTE: Cambiamos esta línea para que use el link directo sin agregar ".mp3"
