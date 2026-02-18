@@ -124,4 +124,11 @@ body.vaporwave #play, body.vaporwave .progress-bar {
     padding: 12px 25px; /* El botón central más grande */
     background: #ff80ab;
 }
+.cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto evita que la imagen se deforme */
+    border-radius: inherit; /* Hereda la redondez de la clase .cover */
+}
+
 
