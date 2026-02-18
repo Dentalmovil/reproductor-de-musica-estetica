@@ -46,7 +46,7 @@ themeBtn.addEventListener('click', () => {
     }
 });
 // Usamos links directos de internet
-const songs = [
+const songs = ['https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73430.mp3'];
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
 ];
