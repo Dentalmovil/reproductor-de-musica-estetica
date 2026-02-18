@@ -26,6 +26,26 @@ body {
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+/* Actualiza estas reglas en tu archivo */
+.player-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 20px 20px 60px #bebebe, 
+               -20px -20px 60px #ffffff; /* Efecto Neumorfismo */
+    transition: all 0.3s ease;
+}
+
+.cover {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border-radius: 50%; /* Ahora la portada es un círculo */
+    animation: rotate 10s linear infinite; /* ¡La portada gira! */
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
 button {
     background: #ff80ab;
