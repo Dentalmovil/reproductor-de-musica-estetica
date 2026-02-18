@@ -1,0 +1,43 @@
+body {
+    background: linear-gradient(135deg, #fce4ec 0%, #e1f5fe 100%); /* Fondo pastel */
+    height: 100-vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+}
+
+.player-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.cover {
+    width: 200px;
+    height: 200px;
+    background: #ffc107; /* Color temporal */
+    margin: 0 auto 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button {
+    background: #ff80ab;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
