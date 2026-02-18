@@ -15,3 +15,19 @@ playBtn.addEventListener('click', () => {
         isPlaying = false;
     }
 });
+const progress = document.getElementById('progress');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
+
+// Actualizar barra de progreso y tiempo
+audio.addEventListener('timeupdate', () => {
+    const { duration, currentTime } = audio;
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = `${progressPercent}%`;
+
+    // Calcular minutos y segundos (formato 0:00)
+    const formatTime = (time) => Math.floor(time / 60) + ":" + Math.floor(time % 60).toString().padStart(2, '0');
+    
+    if (duration) durationEl.innerText = formatTime(duration);
+    currentTimeEl.innerText = formatTime(currentTime);
+});
