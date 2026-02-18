@@ -31,3 +31,18 @@ audio.addEventListener('timeupdate', () => {
     if (duration) durationEl.innerText = formatTime(duration);
     currentTimeEl.innerText = formatTime(currentTime);
 });
+const themeBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+themeBtn.addEventListener('click', () => {
+    // Esto quita o pone la clase 'vaporwave' al body
+    body.classList.toggle('vaporwave');
+    
+    // Cambiamos el texto del botón según el modo
+    if (body.classList.contains('vaporwave')) {
+        themeBtn.innerText = '🌸 Modo Pastel';
+    } else {
+        themeBtn.innerText = '✨ Modo Vaporwave';
+    }
+});
+
