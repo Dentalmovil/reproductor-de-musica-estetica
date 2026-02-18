@@ -45,10 +45,22 @@ themeBtn.addEventListener('click', () => {
         themeBtn.innerText = '✨ Modo Vaporwave';
     }
 });
-const songs = ['musica1', 'musica2', 'musica3']; // Nombres de tus archivos mp3
+// Usamos links directos de internet
+const songs = [
+  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', 
+  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
+];
 let songIndex = 0;
 
-const audio = new Audio(`${songs[songIndex]}.mp3`);
+// IMPORTANTE: Cambiamos esta línea para que use el link directo sin agregar ".mp3"
+const audio = new Audio(songs[songIndex]);
+
+// Actualiza también la función de cargar canción
+function loadSong(index) {
+    audio.src = songs[index]; // Ya no ponemos + ".mp3"
+    if (isPlaying) audio.play();
+}
+
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
 const prevBtn = document.getElementById('prev');
