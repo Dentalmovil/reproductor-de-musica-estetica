@@ -45,4 +45,29 @@ themeBtn.addEventListener('click', () => {
         themeBtn.innerText = '✨ Modo Vaporwave';
     }
 });
+const songs = ['musica1', 'musica2', 'musica3']; // Nombres de tus archivos mp3
+let songIndex = 0;
+
+const audio = new Audio(`${songs[songIndex]}.mp3`);
+const playBtn = document.getElementById('play');
+const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
+
+// Función para cargar canción
+function loadSong(index) {
+    audio.src = `${songs[index]}.mp3`;
+    if (isPlaying) audio.play();
+}
+
+// Eventos para botones
+nextBtn.addEventListener('click', () => {
+    songIndex = (songIndex + 1) % songs.length;
+    loadSong(songIndex);
+});
+
+prevBtn.addEventListener('click', () => {
+    songIndex = (songIndex - 1 + songs.length) % songs.length;
+    loadSong(songIndex);
+});
+
 
