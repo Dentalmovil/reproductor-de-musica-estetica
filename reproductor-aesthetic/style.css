@@ -108,3 +108,20 @@ body.vaporwave #play, body.vaporwave .progress-bar {
     color: #333;
     font-size: 0.8rem;
 }
+.controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.controls button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+#play {
+    padding: 12px 25px; /* El botón central más grande */
+    background: #ff80ab;
+}
+
