@@ -130,5 +130,65 @@ body.vaporwave #play, body.vaporwave .progress-bar {
     object-fit: cover; /* Esto evita que la imagen se deforme */
     border-radius: inherit; /* Hereda la redondez de la clase .cover */
 }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.reproductor-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 30px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.disco {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    background-image: url('portada.jpg'); /* Asegúrate que el nombre coincida */
+    background-size: cover;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    animation: rotar 10s linear infinite;
+    animation-play-state: paused;
+}
+
+.reproductor-card.playing .disco {
+    animation-play-state: running;
+}
+
+@keyframes rotar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.controles button {
+    background: #00d2ff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.controles button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+}
 
 
