@@ -1,0 +1,265 @@
+body {
+    background: linear-gradient(135deg, #fce4ec 0%, #e1f5fe 100%); /* Fondo pastel */
+    height: 100-vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+}
+
+.player-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.cover {
+    width: 200px;
+    height: 200px;
+    background: #ffc107; /* Color temporal */
+    margin: 0 auto 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+/* Actualiza estas reglas en tu archivo */
+.player-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 20px 20px 60px #bebebe, 
+               -20px -20px 60px #ffffff; /* Efecto Neumorfismo */
+    transition: all 0.3s ease;
+}
+
+.cover {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border-radius: 50%; /* Ahora la portada es un círculo */
+    animation: rotate 10s linear infinite; /* ¡La portada gira! */
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+button {
+    background: #ff80ab;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+.progress-container {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 6px;
+    width: 100%;
+    margin: 20px 0 10px;
+    cursor: pointer;
+}
+
+.progress-bar {
+    background: #ff80ab; /* Mismo color que el botón para armonía */
+    border-radius: 10px;
+    height: 100%;
+    width: 0%; /* Empieza en cero */
+    transition: width 0.1s linear;
+}
+
+.time-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 15px;
+}
+/* Clase para el modo "Vaporwave" (se activará con JS) */
+body.vaporwave {
+    background: linear-gradient(135deg, #ff71ce 0%, #01cdfe 100%);
+}
+
+body.vaporwave .player-card {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #b967ff;
+    color: #fff;
+}
+
+body.vaporwave #play, body.vaporwave .progress-bar {
+    background: #05ffa1;
+    color: #000;
+}
+
+/* Estilo para el botón de cambio */
+.mood-btn {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    font-size: 0.8rem;
+}
+.controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.controls button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+#play {
+    padding: 12px 25px; /* El botón central más grande */
+    background: #ff80ab;
+}
+.cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto evita que la imagen se deforme */
+    border-radius: inherit; /* Hereda la redondez de la clase .cover */
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.reproductor-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 30px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.disco {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    background-image: url('portada.jpg'); /* Asegúrate que el nombre coincida */
+    background-size: cover;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    animation: rotar 10s linear infinite;
+    animation-play-state: paused;
+}
+
+.reproductor-card.playing .disco {
+    animation-play-state: running;
+}
+
+@keyframes rotar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.controles button {
+    background: #00d2ff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+}
+
+.controles button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+}
+body {
+    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.music-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    padding: 40px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.album-art {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    background-image: url('portada.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    animation: spin 12s linear infinite;
+    animation-play-state: paused; /* Se activa al dar play */
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+}
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover { transform: scale(1.2); color: #00d2ff; }
+
+.main-btn {
+    background: white;
+    color: #302b63;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-btn:hover { background: #00d2ff; color: white; }
+
+
