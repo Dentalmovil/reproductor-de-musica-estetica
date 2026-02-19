@@ -99,5 +99,22 @@ prevBtn.addEventListener('click', () => {
     songIndex = (songIndex - 1 + songs.length) % songs.length;
     loadSong(songIndex);
 });
+const playBtn = document.getElementById('play');
+const playIcon = document.getElementById('play-icon');
+const disco = document.getElementById('disco');
+
+let isPlaying = false;
+
+playBtn.addEventListener('click', () => {
+    if (!isPlaying) {
+        playIcon.textContent = 'pause';
+        disco.style.animationPlayState = 'running';
+        isPlaying = true;
+    } else {
+        playIcon.textContent = 'play_arrow';
+        disco.style.animationPlayState = 'paused';
+        isPlaying = false;
+    }
+});
 
 
