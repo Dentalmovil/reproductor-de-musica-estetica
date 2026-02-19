@@ -116,5 +116,48 @@ playBtn.addEventListener('click', () => {
         isPlaying = false;
     }
 });
+const playBtn = document.getElementById('play');
+const playIcon = document.getElementById('play-icon');
+const disco = document.getElementById('disco');
+const progressBar = document.querySelector('.progress-bar');
+const progressContainer = document.querySelector('.progress-container');
+
+let isPlaying = false;
+let progressInterval;
+
+// Función para simular el avance de la música
+function updateProgress() {
+    let width = 0;
+    progressInterval = setInterval(() => {
+        if (width >= 100) {
+            clearInterval(progressInterval);
+            resetPlayer();
+        } else {
+            width += 0.5; // Ajusta la velocidad del avance
+            progressBar.style.width = width + '%';
+        }
+    }, 500);
+}
+
+function resetPlayer() {
+    playIcon.textContent = 'play_arrow';
+    disco.style.animationPlayState = 'paused';
+    isPlaying = false;
+    clearInterval(progressInterval);
+}
+
+playBtn.addEventListener('click', () => {
+    if (!isPlaying) {
+        playIcon.textContent = 'pause';
+        disco.style.animationPlayState = 'running';
+        isPlaying = true;
+        updateProgress();
+    } else {
+        playIcon.textContent = 'play_arrow';
+        disco.style.animationPlayState = 'paused';
+        isPlaying = false;
+        clearInterval(progressInterval);
+    }
+});
 
 
