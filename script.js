@@ -160,4 +160,20 @@ playBtn.addEventListener('click', () => {
     }
 });
 
+const audio = document.getElementById('audio-element');
+const playBtn = document.getElementById('play-btn');
+const playIcon = playBtn.querySelector('i');
+
+playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playIcon.classList.replace('fa-play', 'fa-pause');
+        playBtn.style.boxShadow = "0 0 15px #00ffcc";
+    } else {
+        audio.pause();
+        playIcon.classList.replace('fa-pause', 'fa-play');
+        playBtn.style.boxShadow = "none";
+    }
+});
+
 
