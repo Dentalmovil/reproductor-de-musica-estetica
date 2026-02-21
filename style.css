@@ -262,4 +262,65 @@ button:hover { transform: scale(1.2); color: #00d2ff; }
 
 .main-btn:hover { background: #00d2ff; color: white; }
 
+.music-player {
+    background: #1e2329;
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid #2b3139;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    margin-top: 20px;
+}
+
+.album-art {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #00ffcc, #008f7a);
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #0b0e11;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.player-controls button {
+    background: none;
+    border: none;
+    color: #848e9c;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.player-controls button.main-play {
+    background: #00ffcc;
+    color: #0b0e11;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.player-controls button:hover {
+    color: #00ffcc;
+    transform: scale(1.1);
+}
+
+#progress-bar {
+    width: 100%;
+    accent-color: #00ffcc;
+    cursor: pointer;
+}
+
 
