@@ -1,147 +1,134 @@
-/* --- 1. RESET Y BASE --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #0b0e11; 
-    color: #ffffff;
-    line-height: 1.6;
-    padding-bottom: 80px; 
+    background-color: #0b0e11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.dashboard {
-    padding: 20px;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-h3 {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    color: #848e9c;
-}
-
-/* --- 2. TARJETA DE BALANCE --- */
-.balance-card {
-    background: linear-gradient(135deg, #1e2329 0%, #0b0e11 100%);
+.reproductor-de-musica-estetica {
+    background: linear-gradient(145deg, #1e2329, #0b0e11);
+    width: 320px;
     padding: 30px;
-    border-radius: 24px;
-    border: 1px solid #f7931a; /* NARANJA BTC */
+    border-radius: 40px;
+    border: 2px solid #f7931a;
+    box-shadow: 0 20px 50px rgba(247, 147, 26, 0.2);
     text-align: center;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(247, 147, 26, 0.15);
 }
 
-.balance-card small {
-    color: #848e9c;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.7rem;
-}
-
-.balance-card h1 {
-    font-size: 2.8rem;
-    color: #f7931a; /* NARANJA BTC */
-    margin-top: 5px;
-}
-
-/* --- 3. REPRODUCTOR DE MÚSICA --- */
-.music-player {
-    background: #1e2329;
-    padding: 30px;
-    border-radius: 24px;
-    border: 1px solid #f7931a;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(247, 147, 26, 0.1);
+.header {
+    color: #f7931a;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .album-art {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background: linear-gradient(135deg, #f7931a, #b66d0d);
-    margin: 0 auto 15px;
+    margin: 0 auto 20px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 4rem;
     color: #0b0e11;
-    animation: pulse-orange 2s infinite;
+    box-shadow: 0 0 30px rgba(247, 147, 26, 0.3);
 }
 
-@keyframes pulse-orange {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(247, 147, 26, 0.4); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(247, 147, 26, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(247, 147, 26, 0); }
+/* Animación cuando suena */
+.playing {
+    animation: spin 5s linear infinite, pulse 2s infinite;
 }
 
-.player-controls .main-play {
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(247, 147, 26, 0.5); }
+    70% { box-shadow: 0 0 0 20px rgba(247, 147, 26, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(247, 147, 26, 0); }
+}
+
+.track-info h2 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.track-info p {
+    color: #848e9c;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.main-play {
     background: #f7931a;
     border: none;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    color: #0b0e11;
     cursor: pointer;
-    margin: 15px 0;
     transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(247, 147, 26, 0.3);
 }
 
-.volume-control input[type=range] {
-    accent-color: #f7931a;
+.main-play:hover {
+    transform: scale(1.1);
 }
 
-/* --- 4. LISTA DE NOTICIAS --- */
-.news-item {
-    background: #1e2329;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    border-left: 4px solid #f7931a;
-}
-
-/* --- 5. NAVEGACIÓN INFERIOR --- */
-.mobile-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 75px;
-    background: #181a20;
+.volume-container {
+    margin-top: 25px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    border-top: 1px solid #2b3139;
-    z-index: 1000;
+    justify-content: center;
+    gap: 10px;
+    color: #848e9c;
 }
 
-.nav-item.active {
+#volume-slider {
+    accent-color: #f7931a;
+    cursor: pointer;
+}
+
+.mode-selector {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.mode-selector button {
+    background: #1e2329;
+    border: 1px solid #2b3139;
+    color: #848e9c;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.mode-selector button.active-mode {
+    border-color: #f7931a;
     color: #f7931a;
 }
 
-/* --- 6. SPINNER Y BOTONES --- */
-.spinner {
-    border-top: 4px solid #f7931a;
-}
-
-#set-alert-btn {
-    background: #f7931a;
-    color: #0b0e11;
-    border: none;
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Ajuste para que las subidas de precio sigan siendo verdes en la lista */
-.price-up { color: #00ffcc; }
-.price-down { color: #ff4d4d; }
 
 
 
