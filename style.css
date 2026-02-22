@@ -7,10 +7,10 @@
 }
 
 body {
-    background-color: #0b0e11; /* Oscuro Binance */
+    background-color: #0b0e11; 
     color: #ffffff;
     line-height: 1.6;
-    padding-bottom: 80px; /* Espacio para el menú inferior */
+    padding-bottom: 80px; 
 }
 
 .dashboard {
@@ -30,10 +30,10 @@ h3 {
     background: linear-gradient(135deg, #1e2329 0%, #0b0e11 100%);
     padding: 30px;
     border-radius: 24px;
-    border: 1px solid #2b3139;
+    border: 1px solid #f7931a; /* NARANJA BTC */
     text-align: center;
     margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(247, 147, 26, 0.15);
 }
 
 .balance-card small {
@@ -45,7 +45,7 @@ h3 {
 
 .balance-card h1 {
     font-size: 2.8rem;
-    color: #00ffcc; /* Verde Neón */
+    color: #f7931a; /* NARANJA BTC */
     margin-top: 5px;
 }
 
@@ -54,15 +54,15 @@ h3 {
     background: #1e2329;
     padding: 30px;
     border-radius: 24px;
-    border: 1px solid #00ffcc;
+    border: 1px solid #f7931a;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+    box-shadow: 0 0 20px rgba(247, 147, 26, 0.1);
 }
 
 .album-art {
     width: 100px;
     height: 100px;
-    background: linear-gradient(135deg, #00ffcc, #008f7a);
+    background: linear-gradient(135deg, #f7931a, #b66d0d);
     margin: 0 auto 15px;
     border-radius: 50%;
     display: flex;
@@ -70,17 +70,17 @@ h3 {
     align-items: center;
     font-size: 2.5rem;
     color: #0b0e11;
-    animation: pulse 2s infinite;
+    animation: pulse-orange 2s infinite;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.4); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(0, 255, 204, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 204, 0); }
+@keyframes pulse-orange {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(247, 147, 26, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(247, 147, 26, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(247, 147, 26, 0); }
 }
 
 .player-controls .main-play {
-    background: #00ffcc;
+    background: #f7931a;
     border: none;
     width: 60px;
     height: 60px;
@@ -91,12 +91,8 @@ h3 {
     transition: 0.3s;
 }
 
-.volume-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: #848e9c;
+.volume-control input[type=range] {
+    accent-color: #f7931a;
 }
 
 /* --- 4. LISTA DE NOTICIAS --- */
@@ -105,10 +101,10 @@ h3 {
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 12px;
-    border-left: 4px solid #00ffcc;
+    border-left: 4px solid #f7931a;
 }
 
-/* --- 5. NAVEGACIÓN INFERIOR (Sticky) --- */
+/* --- 5. NAVEGACIÓN INFERIOR --- */
 .mobile-nav {
     position: fixed;
     bottom: 0;
@@ -123,60 +119,17 @@ h3 {
     z-index: 1000;
 }
 
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #848e9c;
-    font-size: 0.7rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.nav-item i {
-    font-size: 1.3rem;
-    margin-bottom: 4px;
-}
-
 .nav-item.active {
-    color: #00ffcc;
+    color: #f7931a;
 }
 
-/* --- 6. SPINNER DE CARGA --- */
+/* --- 6. SPINNER Y BOTONES --- */
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255,255,255,0.1);
-    border-top: 4px solid #00ffcc;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 20px auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* --- 7. PANEL DE ALERTAS --- */
-.alerts-panel {
-    background: #1e2329;
-    padding: 20px;
-    border-radius: 15px;
-}
-
-input[type="number"] {
-    background: #0b0e11;
-    border: 1px solid #2b3139;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    width: 100%;
-    margin-bottom: 10px;
+    border-top: 4px solid #f7931a;
 }
 
 #set-alert-btn {
-    background: #00ffcc;
+    background: #f7931a;
     color: #0b0e11;
     border: none;
     width: 100%;
@@ -185,6 +138,11 @@ input[type="number"] {
     font-weight: bold;
     cursor: pointer;
 }
+
+/* Ajuste para que las subidas de precio sigan siendo verdes en la lista */
+.price-up { color: #00ffcc; }
+.price-down { color: #ff4d4d; }
+
 
 
 
