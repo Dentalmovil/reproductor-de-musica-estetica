@@ -1,179 +1,130 @@
-// Seleccionamos los elementos
-const playBtn = document.getElementById('play');
-const audio = new Audio('musica.mp3'); // Asegúrate de tener un archivo llamado musica.mp3
-let isPlaying = false;
+// --- CONFIGURACIÓN Y VARIABLES GLOBALES ---
+let precioObjetivo = localStorage.getItem('alertaBTC') ? parseFloat(localStorage.getItem('alertaBTC')) : null;
 
-// Función para reproducir/pausar
-playBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        audio.play();
-        playBtn.innerText = '⏸ Pause';
-        isPlaying = true;
-    } else {
-        audio.pause();
-        playBtn.innerText = '▶ Play';
-        isPlaying = false;
-    }
-});
-const progress = document.getElementById('progress');
-const currentTimeEl = document.getElementById('current-time');
-const durationEl = document.getElementById('duration');
+// --- 1. LÓGICA DE PRECIOS Y GRÁFICA ---
+async function actualizarPrecios() {
+    try {
+        const res = await fetch('/api/get-prices');
+        const data = await res.json();
+        
+        // Actualizar Balance Principal (basado en BTC)
+        const btcPrice = data.bitcoin.usd;
+        document.getElementById('total-balance').textContent = `$${btcPrice.toLocaleString()}`;
 
-// Actualizar barra de progreso y tiempo
-audio.addEventListener('timeupdate', () => {
-    const { duration, currentTime } = audio;
-    const progressPercent = (currentTime / duration) * 100;
-    progress.style.width = `${progressPercent}%`;
+        // Lista de Criptos con Logotipos
+        const cryptoList = document.getElementById('crypto-list');
+        if (cryptoList) {
+            cryptoList.innerHTML = '';
+            const coins = [
+                { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin', img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png' },
+                { id: 'ethereum', symbol: 'ETH', name: 'Ethereum', img: 'https://cryptologos.cc/logos/ethereum-eth-logo.png' },
+                { id: 'solana', symbol: 'SOL', name: 'Solana', img: 'https://cryptologos.cc/logos/solana-sol-logo.png' }
+            ];
 
-    // Calcular minutos y segundos (formato 0:00)
-    const formatTime = (time) => Math.floor(time / 60) + ":" + Math.floor(time % 60).toString().padStart(2, '0');
-    
-    if (duration) durationEl.innerText = formatTime(duration);
-    currentTimeEl.innerText = formatTime(currentTime);
-});
-const themeBtn = document.getElementById('theme-toggle');
-const body = document.body;
-
-themeBtn.addEventListener('click', () => {
-    // Esto quita o pone la clase 'vaporwave' al body
-    body.classList.toggle('vaporwave');
-    
-    // Cambiamos el texto del botón según el modo
-    if (body.classList.contains('vaporwave')) {
-        themeBtn.innerText = '🌸 Modo Pastel';
-    } else {
-        themeBtn.innerText = '✨ Modo Vaporwave';
-    }
-});
-// Usamos links directos de internet
-// 1. Lista de canciones con links directos
-const songs = [
-  'https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73430.mp3', // Canción 1
-  'https://cdn.pixabay.com/audio/2022/03/15/audio_9032799131.mp3'  // Canción 2
-];
-
-let songIndex = 0;
-let isPlaying = false;
-
-// 2. Configuramos el audio inicial
-const audio = new Audio(songs[songIndex]);
-
-// 3. Función para cargar canciones (Asegúrate de reemplazar la vieja si ya tenías una)
-function loadSong(index) {
-    audio.pause(); 
-    audio.src = songs[index];
-    audio.load(); 
-    if (isPlaying) {
-        audio.play();
-    }
-}
-
-let songIndex = 0;
-
-// IMPORTANTE: Cambiamos esta línea para que use el link directo sin agregar ".mp3"
-const audio = new Audio(songs[songIndex]);
-
-// Actualiza también la función de cargar canción
-function loadSong(index) {
-    audio.src = songs[index]; // Ya no ponemos + ".mp3"
-    if (isPlaying) audio.play();
-}
-
-const playBtn = document.getElementById('play');
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('prev');
-
-// Función para cargar canción
-function loadSong(index) {
-    audio.src = `${songs[index]}.mp3`;
-    if (isPlaying) audio.play();
-}
-
-// Eventos para botones
-nextBtn.addEventListener('click', () => {
-    songIndex = (songIndex + 1) % songs.length;
-    loadSong(songIndex);
-});
-
-prevBtn.addEventListener('click', () => {
-    songIndex = (songIndex - 1 + songs.length) % songs.length;
-    loadSong(songIndex);
-});
-const playBtn = document.getElementById('play');
-const playIcon = document.getElementById('play-icon');
-const disco = document.getElementById('disco');
-
-let isPlaying = false;
-
-playBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        playIcon.textContent = 'pause';
-        disco.style.animationPlayState = 'running';
-        isPlaying = true;
-    } else {
-        playIcon.textContent = 'play_arrow';
-        disco.style.animationPlayState = 'paused';
-        isPlaying = false;
-    }
-});
-const playBtn = document.getElementById('play');
-const playIcon = document.getElementById('play-icon');
-const disco = document.getElementById('disco');
-const progressBar = document.querySelector('.progress-bar');
-const progressContainer = document.querySelector('.progress-container');
-
-let isPlaying = false;
-let progressInterval;
-
-// Función para simular el avance de la música
-function updateProgress() {
-    let width = 0;
-    progressInterval = setInterval(() => {
-        if (width >= 100) {
-            clearInterval(progressInterval);
-            resetPlayer();
-        } else {
-            width += 0.5; // Ajusta la velocidad del avance
-            progressBar.style.width = width + '%';
+            coins.forEach(coin => {
+                const price = data[coin.id].usd;
+                const change = data[coin.id].usd_24h_change.toFixed(2);
+                const card = document.createElement('div');
+                card.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#1e2329; padding:12px; border-radius:12px; margin-bottom:10px; border:1px solid #2b3139;";
+                card.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <img src="${coin.img}" style="width:28px; height:28px;">
+                        <div>
+                            <strong style="display:block; font-size:14px;">${coin.name}</strong>
+                            <small style="color:#848e9c;">${coin.symbol}</small>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-weight:bold; font-size:14px;">$${price.toLocaleString()}</div>
+                        <small style="color: ${change >= 0 ? '#00ffcc' : '#ff4d4d'};">
+                            ${change >= 0 ? '+' : ''}${change}%
+                        </small>
+                    </div>`;
+                cryptoList.appendChild(card);
+            });
         }
-    }, 500);
-}
 
-function resetPlayer() {
-    playIcon.textContent = 'play_arrow';
-    disco.style.animationPlayState = 'paused';
-    isPlaying = false;
-    clearInterval(progressInterval);
-}
+        // Verificación de Alerta
+        if (precioObjetivo && btcPrice >= precioObjetivo) {
+            alert(`🚀 ¡ALERTA! Bitcoin ha alcanzado los $${precioObjetivo}`);
+            precioObjetivo = null;
+            localStorage.removeItem('alertaBTC');
+            document.getElementById('alert-status').textContent = "No hay alertas activas";
+        }
 
-playBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        playIcon.textContent = 'pause';
-        disco.style.animationPlayState = 'running';
-        isPlaying = true;
-        updateProgress();
-    } else {
-        playIcon.textContent = 'play_arrow';
-        disco.style.animationPlayState = 'paused';
-        isPlaying = false;
-        clearInterval(progressInterval);
+    } catch (error) {
+        console.error("Error en precios:", error);
     }
-});
+}
 
+// --- 2. LÓGICA DE NOTICIAS ---
+async function obtenerNoticias() {
+    const newsList = document.getElementById('news-list');
+    try {
+        const res = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
+        const data = await res.json();
+        newsList.innerHTML = '';
+        data.Data.slice(0, 5).forEach(noticia => {
+            const item = document.createElement('div');
+            item.className = 'news-item';
+            item.innerHTML = `
+                <a href="${noticia.url}" target="_blank" style="text-decoration:none; color:inherit;">
+                    <h4 style="color:#00ffcc;">${noticia.title}</h4>
+                    <small>${noticia.source}</small>
+                </a>`;
+            newsList.appendChild(item);
+        });
+    } catch (e) { newsList.innerHTML = "<p>Error al cargar noticias</p>"; }
+}
+
+// --- 3. REPRODUCTOR DE MÚSICA ---
 const audio = document.getElementById('audio-element');
 const playBtn = document.getElementById('play-btn');
-const playIcon = playBtn.querySelector('i');
+const volumeSlider = document.getElementById('volume-slider');
 
-playBtn.addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play();
-        playIcon.classList.replace('fa-play', 'fa-pause');
-        playBtn.style.boxShadow = "0 0 15px #00ffcc";
-    } else {
-        audio.pause();
-        playIcon.classList.replace('fa-pause', 'fa-play');
-        playBtn.style.boxShadow = "none";
+if (playBtn) {
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            audio.pause();
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    });
+}
+if (volumeSlider) {
+    volumeSlider.addEventListener('input', (e) => { audio.volume = e.target.value; });
+}
+
+// --- 4. NAVEGACIÓN ---
+const navItems = document.querySelectorAll('.nav-item');
+const sections = document.querySelectorAll('.app-section');
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const target = item.getAttribute('data-target');
+        navItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        sections.forEach(s => s.style.display = 'none');
+        document.getElementById(target).style.display = 'block';
+        if (target === 'view-news') obtenerNoticias();
+    });
+});
+
+// --- 5. BOTÓN DE ALERTA ---
+document.getElementById('set-alert-btn').addEventListener('click', () => {
+    const val = parseFloat(document.getElementById('target-price').value);
+    if (val > 0) {
+        precioObjetivo = val;
+        localStorage.setItem('alertaBTC', val);
+        document.getElementById('alert-status').innerHTML = `🔔 Alerta en: <strong>$${val}</strong>`;
+        alert("Alerta guardada");
     }
 });
+
+// Inicialización
+actualizarPrecios();
+setInterval(actualizarPrecios, 30000);
 
 
