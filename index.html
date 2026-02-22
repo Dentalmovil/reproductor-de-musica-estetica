@@ -3,59 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finanzas Vibe | Pro Dashboard</title>
-   
-      <section id="view-news" class="app-section" style="display: none;">
-            <h3>Noticias Flash ⚡</h3>
-            <div id="news-list">
-                <div class="spinner"></div>
-                <p id="loading-text" style="text-align: center;">Buscando las últimas noticias...</p>
-            </div>
-        </section>
+    <title>Reproductor de Música Estética</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
 
-        <section id="view-music" class="app-section" style="display: none;">
-            <h3>Music Station 🎧</h3>
-            <div class="music-player">
-                <div class="album-art">
-                    <i class="fas fa-compact-disc"></i>
-                </div>
-                <div class="track-info">
-                    <h4>Lo-Fi Trading 24/7</h4>
-                    <p>Radio Online</p>
-                </div>
-                
-                <audio id="audio-element" src="https://stream.zeno.fm/f3wvbb76v09uv"></audio>
-
-                <div class="player-controls">
-                    <button id="play-btn" class="main-play">
-                        <i class="fas fa-play"></i>
-                    </button>
-                </div>
-
-                <div class="volume-control">
-                    <i class="fas fa-volume-down"></i>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
-                    <i class="fas fa-volume-up"></i>
-                </div>
+    <div class="container">
+        <div class="reproductor-de-musica-estetica">
+            <div class="header">
+                <i class="fab fa-bitcoin"></i>
+                <span>Crypto Radio & MP3</span>
             </div>
-        </section>
 
-        <section id="view-alerts" class="app-section" style="display: none;">
-                <span>Noticias</span>
+            <div class="album-art" id="album-art">
+                <i class="fas fa-compact-disc"></i>
             </div>
-            <div class="nav-item" data-target="view-music">
-                <i class="fas fa-headphones"></i>
-                <span>Música</span>
-            </div>
-            <div class="nav-item" data-target="view-alerts">
-                <i class="fas fa-bell"></i>
-                <span>Alertas</span>
-            </div>
-        </nav>
 
-    </div> <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <div class="track-info">
+                <h2 id="track-title">Lo-Fi Trading</h2>
+                <p id="track-artist">Radio Online 24/7</p>
+            </div>
+
+            <audio id="audio-element" src="https://stream.zeno.fm/f3wvbb76v09uv"></audio>
+
+            <div class="player-controls">
+                <button id="play-btn" class="main-play">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+
+            <div class="volume-container">
+                <i class="fas fa-volume-down"></i>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+                <i class="fas fa-volume-up"></i>
+            </div>
+
+            <div class="mode-selector">
+                <button onclick="changeSource('radio')" id="btn-radio" class="active-mode">Radio Live</button>
+                <button onclick="changeSource('mp3')" id="btn-mp3">MP3 Local</button>
+            </div>
+            
+            <input type="file" id="file-input" accept="audio/mp3" style="display: none;">
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
