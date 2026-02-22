@@ -1,30 +1,60 @@
+const audio = document.getElementById('audio-element');
+const playBtn = document.getElementById('play-btn');
+const albumArt = document.getElementById('album-art');
+const volumeSlider = document.getElementById('volume-slider');
+const trackTitle = document.getElementById('track-title');
+const trackArtist = document.getElementById('track-artist');
+const fileInput = document.getElementById('file-input');
 
-          coins.forEach(coin => {
-                const price = data[coin.id].usd;
-                const change = data[coin.id].usd_24h_change.toFixed(2);
-                
-                const card = document.createElement('div');
-                // Estilo en línea para asegurar que se vea con el fondo oscuro
-                card.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#1e2329; padding:15px; border-radius:12px; margin-bottom:12px; border:1px solid #2b3139;";
-                
-                card.innerHTML = `
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <img src="${coin.img}" alt="${coin.name}" style="width:30px; height:30px;">
-                        <div>
-                            <strong style="display:block; color:#ffffff; font-size:14px;">${coin.name}</strong>
-                            <small style="color:#848e9c; font-size:12px;">${coin.symbol}</small>
-                        </div>
-                    </div>
-                    <div style="text-align:right;">
-                        <div style="font-weight:bold; color:#ffffff; font-size:15px;">$${price.toLocaleString()}</div>
-                        <small style="color: ${change >= 0 ? '#00ffcc' : '#ff4d4d'}; font-size:12px; font-weight:bold;">
-                            ${change >= 0 ? '▲' : '▼'} ${Math.abs(change)}%
-                        </small>
-                    </div>
-                `;
-                cryptoList.appendChild(card);
-            });
-        }
+// Play / Pausa
+playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        albumArt.classList.add('playing');
+    } else {
+        audio.pause();
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        albumArt.classList.remove('playing');
+    }
+});
+
+// Control de Volumen
+volumeSlider.addEventListener('input', (e) => {
+    audio.volume = e.target.value;
+});
+
+// Cambio de Fuente (Radio o MP3)
+function changeSource(mode) {
+    document.getElementById('btn-radio').classList.remove('active-mode');
+    document.getElementById('btn-mp3').classList.remove('active-mode');
+
+    if (mode === 'radio') {
+        document.getElementById('btn-radio').classList.add('active-mode');
+        audio.src = "https://stream.zeno.fm/f3wvbb76v09uv";
+        trackTitle.innerText = "Lo-Fi Trading";
+        trackArtist.innerText = "Radio Online 24/7";
+        audio.play();
+    } else {
+        document.getElementById('btn-mp3').classList.add('active-mode');
+        fileInput.click(); // Abrir selector de archivos
+    }
+}
+
+// Cargar archivo MP3 local
+fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        audio.src = url;
+        trackTitle.innerText = file.name.replace('.mp3', '');
+        trackArtist.innerText = "Archivo Local";
+        audio.play();
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        albumArt.classList.add('playing');
+    }
+});
+
 
 
 
