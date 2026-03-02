@@ -128,6 +128,40 @@ body {
     border-color: #f7931a;
     color: #f7931a;
 }
+.binance-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.binance-link:hover {
+    color: #F3BA2F; /* Color corporativo de Binance */
+    transform: scale(1.05);
+}
+
+.binance-link i {
+    font-size: 1.2rem;
+}
+
+.active-mode {
+    background: #F3BA2F !important;
+    color: #000 !important;
+}
+
+/* Animación de rotación para el disco */
+.album-art {
+    animation: rotate 10s linear infinite;
+    animation-play-state: paused;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
 
 
