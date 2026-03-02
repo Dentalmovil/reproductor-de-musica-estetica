@@ -18,3 +18,5 @@ Un reproductor de música web con diseño moderno y minimalista, optimizado para
 1. Abre el archivo `index.html` en tu navegador.
 2. Selecciona **Radio Live** para escuchar el flujo de streaming configurado.
 3. Cambia a **MP3 Local** si deseas subir una canción de tu carpeta personal.
+
+https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=es-LA&ref=GRO_28502_VU9YR&utm_source=default
