@@ -1,265 +1,140 @@
-body {
-    background: linear-gradient(135deg, #fce4ec 0%, #e1f5fe 100%); /* Fondo pastel */
-    height: 100-vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
+/* RESET GENERAL */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.player-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
-    padding: 2rem;
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+body {
+    background-color: #0d0f12; /* Fondo oscuro profundo */
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 20px;
+    padding-bottom: 100px; /* Espacio para el menú inferior */
+}
+
+/* TARJETA PRINCIPAL (PRECIO BTC) */
+.balance-card {
+    background: linear-gradient(145deg, #1a1d23, #111317);
+    padding: 25px;
+    border-radius: 24px;
     text-align: center;
-    width: 300px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.cover {
-    width: 200px;
-    height: 200px;
-    background: #ffc107; /* Color temporal */
-    margin: 0 auto 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-/* Actualiza estas reglas en tu archivo */
-.player-card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 20px 20px 60px #bebebe, 
-               -20px -20px 60px #ffffff; /* Efecto Neumorfismo */
-    transition: all 0.3s ease;
+#balance-name {
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
 }
 
-.cover {
-    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-    border-radius: 50%; /* Ahora la portada es un círculo */
-    animation: rotate 10s linear infinite; /* ¡La portada gira! */
+#total-balance {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: #00ffa3; /* Verde neón */
+    font-weight: 800;
 }
 
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+/* CUADRÍCULA DE MONEDAS */
+#crypto-list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* Dos columnas fijas */
+    gap: 15px;
 }
 
-button {
-    background: #ff80ab;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 50px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+.coin-card {
     transition: transform 0.2s;
 }
 
-button:hover {
-    transform: scale(1.1);
+.coin-card:active {
+    transform: scale(0.95);
 }
-.progress-container {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    height: 6px;
+
+/* SECCIONES */
+.app-section {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ALERTAS Y FORMULARIOS */
+.alerts-panel {
+    background: #1a1d23;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.app-input {
     width: 100%;
-    margin: 20px 0 10px;
-    cursor: pointer;
-}
-
-.progress-bar {
-    background: #ff80ab; /* Mismo color que el botón para armonía */
+    background: #000;
+    border: 1px solid #333;
+    color: white;
+    padding: 12px;
     border-radius: 10px;
-    height: 100%;
-    width: 0%; /* Empieza en cero */
-    transition: width 0.1s linear;
+    outline: none;
 }
 
-.time-container {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 15px;
-}
-/* Clase para el modo "Vaporwave" (se activará con JS) */
-body.vaporwave {
-    background: linear-gradient(135deg, #ff71ce 0%, #01cdfe 100%);
-}
-
-body.vaporwave .player-card {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid #b967ff;
-    color: #fff;
-}
-
-body.vaporwave #play, body.vaporwave .progress-bar {
-    background: #05ffa1;
-    color: #000;
-}
-
-/* Estilo para el botón de cambio */
-.mood-btn {
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.5);
-    color: #333;
-    font-size: 0.8rem;
-}
-.controls {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.controls button {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-}
-
-#play {
-    padding: 12px 25px; /* El botón central más grande */
-    background: #ff80ab;
-}
-.cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Esto evita que la imagen se deforme */
-    border-radius: inherit; /* Hereda la redondez de la clase .cover */
-}
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
-.reproductor-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-    padding: 30px;
-    width: 320px;
-    text-align: center;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.disco {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    background-image: url('portada.jpg'); /* Asegúrate que el nombre coincida */
-    background-size: cover;
-    border: 5px solid rgba(255, 255, 255, 0.1);
-    animation: rotar 10s linear infinite;
-    animation-play-state: paused;
-}
-
-.reproductor-card.playing .disco {
-    animation-play-state: running;
-}
-
-@keyframes rotar {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.controles button {
-    background: #00d2ff;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
+#set-alert-btn {
     cursor: pointer;
-    color: white;
-    transition: 0.3s;
+    transition: background 0.3s;
 }
 
-.controles button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
-}
-body {
-    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    color: white;
+#set-alert-btn:hover {
+    background: #00cc82;
 }
 
-.music-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    padding: 40px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-}
-
-.album-art {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    margin: 0 auto 30px;
-    background-image: url('portada.jpg');
-    background-size: cover;
-    background-position: center;
-    border: 8px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 30px rgba(0,0,0,0.3);
-    animation: spin 12s linear infinite;
-    animation-play-state: paused; /* Se activa al dar play */
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.controls {
+/* NAVEGACIÓN INFERIOR */
+.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(13, 15, 18, 0.95);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    margin-top: 30px;
+    padding: 15px 0;
+    border-top: 1px solid #222;
+    z-index: 1000;
 }
 
-button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover { transform: scale(1.2); color: #00d2ff; }
-
-.main-btn {
-    background: white;
-    color: #302b63;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+.nav-item {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    color: #555;
+    font-size: 0.7rem;
+    cursor: pointer;
 }
 
-.main-btn:hover { background: #00d2ff; color: white; }
+.nav-item.active {
+    color: #00ffa3;
+}
 
+.nav-item i {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
 
+/* NOTICIAS */
+#news-list div {
+    background: #1a1d23;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 4px solid #00ffa3;
+}
