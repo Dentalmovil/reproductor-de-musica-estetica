@@ -1,163 +1,60 @@
-// Seleccionamos los elementos
-const playBtn = document.getElementById('play');
-const audio = new Audio('musica.mp3'); // Asegúrate de tener un archivo llamado musica.mp3
-let isPlaying = false;
+const audio = document.getElementById('audio-element');
+const playBtn = document.getElementById('play-btn');
+const playIcon = playBtn.querySelector('i');
+const volumeSlider = document.getElementById('volume-slider');
+const trackTitle = document.getElementById('track-title');
+const trackArtist = document.getElementById('track-artist');
+const fileInput = document.getElementById('file-input');
+const albumArt = document.getElementById('album-art');
 
-// Función para reproducir/pausar
+// Función Play/Pausa
 playBtn.addEventListener('click', () => {
-    if (!isPlaying) {
+    if (audio.paused) {
         audio.play();
-        playBtn.innerText = '⏸ Pause';
-        isPlaying = true;
+        playIcon.classList.replace('fa-play', 'fa-pause');
+        albumArt.style.animationPlayState = 'running';
     } else {
         audio.pause();
-        playBtn.innerText = '▶ Play';
-        isPlaying = false;
+        playIcon.classList.replace('fa-pause', 'fa-play');
+        albumArt.style.animationPlayState = 'paused';
     }
 });
-const progress = document.getElementById('progress');
-const currentTimeEl = document.getElementById('current-time');
-const durationEl = document.getElementById('duration');
 
-// Actualizar barra de progreso y tiempo
-audio.addEventListener('timeupdate', () => {
-    const { duration, currentTime } = audio;
-    const progressPercent = (currentTime / duration) * 100;
-    progress.style.width = `${progressPercent}%`;
-
-    // Calcular minutos y segundos (formato 0:00)
-    const formatTime = (time) => Math.floor(time / 60) + ":" + Math.floor(time % 60).toString().padStart(2, '0');
-    
-    if (duration) durationEl.innerText = formatTime(duration);
-    currentTimeEl.innerText = formatTime(currentTime);
+// Control de volumen
+volumeSlider.addEventListener('input', (e) => {
+    audio.volume = e.target.value;
 });
-const themeBtn = document.getElementById('theme-toggle');
-const body = document.body;
 
-themeBtn.addEventListener('click', () => {
-    // Esto quita o pone la clase 'vaporwave' al body
-    body.classList.toggle('vaporwave');
-    
-    // Cambiamos el texto del botón según el modo
-    if (body.classList.contains('vaporwave')) {
-        themeBtn.innerText = '🌸 Modo Pastel';
-    } else {
-        themeBtn.innerText = '✨ Modo Vaporwave';
-    }
-});
-// Usamos links directos de internet
-// 1. Lista de canciones con links directos
-const songs = [
-  'https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73430.mp3', // Canción 1
-  'https://cdn.pixabay.com/audio/2022/03/15/audio_9032799131.mp3'  // Canción 2
-];
+// Cambiar entre Radio y MP3
+window.changeSource = function(mode) {
+    document.getElementById('btn-radio').classList.remove('active-mode');
+    document.getElementById('btn-mp3').classList.remove('active-mode');
 
-let songIndex = 0;
-let isPlaying = false;
-
-// 2. Configuramos el audio inicial
-const audio = new Audio(songs[songIndex]);
-
-// 3. Función para cargar canciones (Asegúrate de reemplazar la vieja si ya tenías una)
-function loadSong(index) {
-    audio.pause(); 
-    audio.src = songs[index];
-    audio.load(); 
-    if (isPlaying) {
+    if (mode === 'radio') {
+        document.getElementById('btn-radio').classList.add('active-mode');
+        audio.src = "https://stream.zeno.fm/f3wvbb76v09uv";
+        trackTitle.textContent = "Lo-Fi Trading";
+        trackArtist.textContent = "Radio Online 24/7";
         audio.play();
-    }
-}
-
-let songIndex = 0;
-
-// IMPORTANTE: Cambiamos esta línea para que use el link directo sin agregar ".mp3"
-const audio = new Audio(songs[songIndex]);
-
-// Actualiza también la función de cargar canción
-function loadSong(index) {
-    audio.src = songs[index]; // Ya no ponemos + ".mp3"
-    if (isPlaying) audio.play();
-}
-
-const playBtn = document.getElementById('play');
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('prev');
-
-// Función para cargar canción
-function loadSong(index) {
-    audio.src = `${songs[index]}.mp3`;
-    if (isPlaying) audio.play();
-}
-
-// Eventos para botones
-nextBtn.addEventListener('click', () => {
-    songIndex = (songIndex + 1) % songs.length;
-    loadSong(songIndex);
-});
-
-prevBtn.addEventListener('click', () => {
-    songIndex = (songIndex - 1 + songs.length) % songs.length;
-    loadSong(songIndex);
-});
-const playBtn = document.getElementById('play');
-const playIcon = document.getElementById('play-icon');
-const disco = document.getElementById('disco');
-
-let isPlaying = false;
-
-playBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        playIcon.textContent = 'pause';
-        disco.style.animationPlayState = 'running';
-        isPlaying = true;
+        playIcon.classList.replace('fa-play', 'fa-pause');
     } else {
-        playIcon.textContent = 'play_arrow';
-        disco.style.animationPlayState = 'paused';
-        isPlaying = false;
+        document.getElementById('btn-mp3').classList.add('active-mode');
+        fileInput.click();
     }
-});
-const playBtn = document.getElementById('play');
-const playIcon = document.getElementById('play-icon');
-const disco = document.getElementById('disco');
-const progressBar = document.querySelector('.progress-bar');
-const progressContainer = document.querySelector('.progress-container');
-
-let isPlaying = false;
-let progressInterval;
-
-// Función para simular el avance de la música
-function updateProgress() {
-    let width = 0;
-    progressInterval = setInterval(() => {
-        if (width >= 100) {
-            clearInterval(progressInterval);
-            resetPlayer();
-        } else {
-            width += 0.5; // Ajusta la velocidad del avance
-            progressBar.style.width = width + '%';
-        }
-    }, 500);
 }
 
-function resetPlayer() {
-    playIcon.textContent = 'play_arrow';
-    disco.style.animationPlayState = 'paused';
-    isPlaying = false;
-    clearInterval(progressInterval);
-}
-
-playBtn.addEventListener('click', () => {
-    if (!isPlaying) {
-        playIcon.textContent = 'pause';
-        disco.style.animationPlayState = 'running';
-        isPlaying = true;
-        updateProgress();
-    } else {
-        playIcon.textContent = 'play_arrow';
-        disco.style.animationPlayState = 'paused';
-        isPlaying = false;
-        clearInterval(progressInterval);
+// Cargar MP3 Local
+fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        audio.src = url;
+        trackTitle.textContent = file.name.replace('.mp3', '');
+        trackArtist.textContent = "Archivo Local";
+        audio.play();
+        playIcon.classList.replace('fa-play', 'fa-pause');
     }
 });
+
 
 
